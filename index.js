@@ -10,5 +10,5 @@ dynamoose.aws.ddb.local();
 app.use('/', router);
 
 app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
+  console.log(`⚡️[server]: Server is running in port ${PORT}`);
 });

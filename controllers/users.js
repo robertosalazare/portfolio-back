@@ -1,11 +1,9 @@
 const mediator = require("../app/mediator");
 
 const routes = (router) => {
-  router.post('/user', mediator.postUser);
+  router.post('/user', mediator.getElement('postUser'));
 
-  router.get('/user', (req, res) => {
-    res.send('not implemented yet');
-  });
+  router.get('/user', mediator.getElement('getAllUsers'));
 }
 
 module.exports = routes;
