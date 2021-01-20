@@ -1,12 +1,18 @@
 const express = require('express');
 const dynamoose = require("dynamoose");
 const router = require('./controllers');
+const bodyParser = require('body-parser')
+const dotnev = require('dotenv');
+
+dotnev.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT;
 
-dynamoose.aws.ddb.local();
+dynamoose.aws.ddb.local('http://localhost:8000');
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use('/', router);
 
 app.listen(PORT, () => {

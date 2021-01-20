@@ -1,5 +1,7 @@
 const fs = require('fs');
 const { resolve } = require('path');
+const Ajv = require("ajv").default
+const ajv = new Ajv();
 
 function readDirSyncRecursive(dir, results = []) {
   const dirents = fs.readdirSync(dir, { withFileTypes: true });
@@ -18,8 +20,13 @@ function readDirSyncRecursive(dir, results = []) {
 function Mediator() {
   this._elements = {};
 
-  this.addElement = (fn) => {
-    this._elements[fn.name] = fn;
+  this.addElement = (fn, schema) => {
+    const validate = ajv.compile(schema)
+
+    this._elements[fn.name] = {
+      handler: fn,
+      validate,
+    };
   }
 
   this.getElement = (key) => {
@@ -33,9 +40,21 @@ function Mediator() {
   files.forEach(file => {
     const fileName = file.split('/').pop();
 
-    if(!fileName.includes('mediator')) {
+    if(fileName.includes('.handler.js')) {
+      const name = fileName.split('.')[0];
+      let schema = null;
+      let dir = file.split('/');
+      dir.pop();
+      dir = dir.join('/');
+
+      const validationDir = `${dir}/${name}.validation.js`;
+
+      if(fs.existsSync(validationDir)) {
+        schema = require(validationDir);
+      }
+
       const fn = require(file);
-      this.addElement(fn);
+      this.addElement(fn, schema);
     }
   });
 }
