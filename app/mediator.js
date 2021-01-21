@@ -20,8 +20,8 @@ function readDirSyncRecursive(dir, results = []) {
 function Mediator() {
   this._elements = {};
 
-  this.addElement = (fn, schema) => {
-    const validate = ajv.compile(schema)
+  this._addElement = (fn, schema) => {
+    const validate = schema ? ajv.compile(schema) : null;
 
     this._elements[fn.name] = {
       handler: fn,
@@ -54,7 +54,7 @@ function Mediator() {
       }
 
       const fn = require(file);
-      this.addElement(fn, schema);
+      this._addElement(fn, schema);
     }
   });
 }

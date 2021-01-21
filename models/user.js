@@ -1,17 +1,11 @@
 const { Schema, model } = require('dynamoose');
-const { v4: uuidv4 } = require('uuid');
 
 const UserSchema = new Schema({
-  "id": {
-    "type": String,
-    "hashKey": true,
-    "required": true,
-    "default": uuidv4()
-  },
   "email": {
     "type": String,
     "validate": /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/g,
-    "required": true
+    "required": true,
+    "hashKey": true,
   },
   "name": {
     "type": String,
@@ -22,7 +16,7 @@ const UserSchema = new Schema({
     "required": true
   }
 }, {
-  "timestamps": true
+  "timestamps": false
 });
 
 const User = model('Users', UserSchema);

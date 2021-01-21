@@ -1,5 +1,5 @@
 ## Dynamodb and expressjs boilerplate code
-This repository contains boilerplater code for a project working with Nodejs, Express and dynamodb. The structure of the code follows a Domain Driven Design and it implement the CQRS and mediator patterns.
+This repository contains boilerplater code for a project working with Nodejs, Express and dynamodb. The structure of the code follows a Domain Driven Design and it implement the CQRS and mediator patterns. The project uses ajv for validating the requests.
 
 > "Your architecture should tell readers about the system, not about the frameworks you used in your system" -Robert C. Martin.
 
