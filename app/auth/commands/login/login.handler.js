@@ -1,10 +1,10 @@
-const { User } = require('../../../models/user');
-const encrypter = require('../../../utils/encrypter');
+const { User } = require('../../../../models/user');
+const encrypter = require('../../../../utils/encrypter');
 
 async function login(req, res) {
   const { email, password } = req.body;
 
-  const user = await User.get(email);
+  const user = await User.findOne({ email });
 
   if(!user) {
     return res.status(404).json({

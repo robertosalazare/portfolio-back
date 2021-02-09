@@ -1,11 +1,10 @@
-const { Schema, model } = require('dynamoose');
+const { Schema, model } = require('mongoose');
 
 const UserSchema = new Schema({
   "email": {
     "type": String,
     "validate": /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/g,
     "required": true,
-    "hashKey": true,
   },
   "name": {
     "type": String,
