@@ -1,7 +1,5 @@
 ## Mongodb and expressjs blog and portfolio backend
-This repository contains boilerplater code for a project working with Nodejs, Express and Mongodb. The structure of the code follows a Domain Driven Design and it implement the CQRS and mediator patterns. The project uses ajv for validating the requests.
-
-> "Your architecture should tell readers about the system, not about the frameworks you used in your system" -Robert C. Martin.
+This repository contains boilerplater code for a project working with Nodejs, Express and Mongodb. The code also contains an auth system and a crud of blog post's.
 
 ### Dependencies:
 - Nodejs and npm version 10+
