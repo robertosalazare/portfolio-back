@@ -7,7 +7,7 @@ async function loggedIn(req, res, next) {
   if(token) {
     try {
       const { email } = jwt.verify(token, process.env.JWT_SECRET);
-      const user = await User.get(email);
+      const user = await User.findOne({ email });
       req.user = user;
 
       next();

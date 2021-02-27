@@ -28,10 +28,13 @@ async function login(req, res) {
     httpOnly: true,
   });
 
-  res.status(200).json({
+  const response = {
     ...user.toJSON(),
     password: undefined,
-  });
+    __v: undefined,
+  };
+
+  res.status(200).json(response);
 }
 
 module.exports = login;
